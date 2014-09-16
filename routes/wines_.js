@@ -4,12 +4,11 @@ var Server = mongo.Server,
     Db = mongo.Db,
     BSON = mongo.BSONPure;
 
-//var server = new Server('localhost', 27017, {auto_reconnect: true});
-var server = new Server('ds035270.mongolab.com', 35270, {auto_reconnect: true});
-db = new Db('heroku_app29635079', server, {safe: true});
+var server = new Server('localhost', 27017, {auto_reconnect: true});
+db = new Db('winedb', server, {safe: true});
 
-db.open(function(err, client) {
-    client.authenticate('wine_admin', 'wine123', function(err, success){
+db.open(function(err, db) {
+    if(!err) {
         console.log("Connected to 'winedb' database");
         db.collection('wines', {safe:true}, function(err, collection) {
             if (err) {
